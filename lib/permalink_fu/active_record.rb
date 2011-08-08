@@ -102,10 +102,10 @@ module PermalinkFu
           [self.class.permalink_options[:scope]].flatten.each do |scope|
             value = send(scope)
             if value
-              conditions.first << " and #{scope} = ?"
+              conditions.first << " and #{self.class.table_name}.#{scope} = ?"
               conditions       << send(scope)
             else
-              conditions.first << " and #{scope} IS NULL"
+              conditions.first << " and #{self.class.table_name}.#{scope} IS NULL"
             end
           end
         end
